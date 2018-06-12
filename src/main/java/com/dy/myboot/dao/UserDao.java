@@ -1,17 +1,10 @@
 package com.dy.myboot.dao;
 
+import com.dy.myboot.core.dao.impl.DaoImpl;
 import com.dy.myboot.model.User;
-import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
+@Repository
+public class UserDao extends DaoImpl<User, Integer>  {
 
-public interface UserDao {
-    int insert(User record);
-
-    List<User> selectUsers();
-
-    @Select("select * from t_user where userId=#{id}")
-    User getUserById(int id);
-
-    List<User> sqlfindall(String sql);
 }
