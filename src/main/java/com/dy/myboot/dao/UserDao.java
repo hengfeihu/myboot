@@ -5,6 +5,6 @@ import com.dy.myboot.model.User;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserDao extends DaoImpl<User, Integer>  {
+public class UserDao extends DaoImpl<User, Integer> {
 
 }
