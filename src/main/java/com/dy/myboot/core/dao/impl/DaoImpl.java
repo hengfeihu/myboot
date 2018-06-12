@@ -478,7 +478,6 @@ public class DaoImpl<T extends Po, PK extends Serializable> implements Dao<T, PK
             try {
                 SqlUtil.setFileValue(t, key, val);
             } catch (Exception e) {
-                // TODO: handle exception
                 logger.error("/********************************");
                 logger.error("/实例化Bean失败(" + this.entityClass + ")不能赋值到字段(" + key + "):"
                         + e.getMessage());

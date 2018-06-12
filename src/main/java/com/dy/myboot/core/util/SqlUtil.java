@@ -16,13 +16,6 @@ import com.dy.myboot.core.beans.Pram;
 import com.dy.myboot.core.sql.exception.AiyiIdTypeException;
 
 public class SqlUtil {
-
-//	/**
-//	 * 链接
-//	 */
-//	public static final QueryRunner SQLSESSION = new QueryRunner((DataSource)new ClassPathXmlApplicationContext("spring.xml").getBean("dataSource"));
-
-
     /**
      * 获取一个实体类中的所有字段
      *
@@ -48,19 +41,14 @@ public class SqlUtil {
                     }
                 }
             } catch (NoSuchMethodException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (SecurityException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (IllegalArgumentException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -92,19 +80,14 @@ public class SqlUtil {
                     }
                 }
             } catch (NoSuchMethodException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (SecurityException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (IllegalArgumentException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -164,22 +147,16 @@ public class SqlUtil {
                 }
             }
         } catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (SecurityException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return list;
@@ -217,22 +194,16 @@ public class SqlUtil {
                 }
             }
         } catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (SecurityException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return list;
@@ -271,22 +242,16 @@ public class SqlUtil {
                 }
             }
         } catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (SecurityException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return list;
@@ -323,22 +288,16 @@ public class SqlUtil {
                 }
             }
         } catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (SecurityException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return list;
@@ -396,22 +355,16 @@ public class SqlUtil {
             Object invoke = method.invoke(o);
             return null == invoke ? null : (Serializable) invoke;
         } catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (SecurityException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return null;
@@ -432,19 +385,14 @@ public class SqlUtil {
             Object invoke = method.invoke(o);
             return null == invoke ? null : (Serializable) invoke;
         } catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (SecurityException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return null;
@@ -488,10 +436,8 @@ public class SqlUtil {
                         return true;
                     }
                 } catch (AiyiIdTypeException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 } catch (NoSuchFieldException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -499,19 +445,14 @@ public class SqlUtil {
             method.invoke(po, fileValue);
             return true;
         } catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (SecurityException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return false;
@@ -534,37 +475,4 @@ public class SqlUtil {
         }
         return tName.toLowerCase();
     }
-
-    /**
-     * 获取某个表中下次将用的Id
-     * @param tableName
-     * @return
-     *//*
-	public static Serializable getNextId(String tableName){
-		//SELECT auto_increment FROM information_schema.`TABLES` WHERE TABLE_NAME='aiyi_resource_language';
-		try {
-			return C3P0Connection.getSession().query("SELECT auto_increment FROM information_schema.`TABLES` WHERE TABLE_NAME='" + tableName + "';", new ScalarHandler<Serializable>(1));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return 0;
-	}
-
-
-	*//**
-     * 获取某个实体类的下次使用的主键
-     * @param po
-     * @return
-     *//*
-	public static <T extends Po> Serializable getNextId(Class<T> po){
-		//SELECT auto_increment FROM information_schema.`TABLES` WHERE TABLE_NAME='aiyi_resource_language';
-		try {
-			return C3P0Connection.getSession().query("SELECT auto_increment FROM information_schema.`TABLES` WHERE TABLE_NAME='" + getTableName(po) + "';", new ScalarHandler<Serializable>(1));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return 0;
-	}*/
 }

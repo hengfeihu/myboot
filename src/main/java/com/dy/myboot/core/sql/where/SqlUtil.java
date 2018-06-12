@@ -593,7 +593,6 @@ public class SqlUtil<T extends Po> {
     }
 
     public String getTableNameByClazz(Class<? extends Po> po) {
-        // TODO Auto-generated method stub
         if (po.isAnnotationPresent(TableName.class)) {
             return po.getAnnotation(TableName.class).name();
         } else {
