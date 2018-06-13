@@ -1,11 +1,14 @@
 package com.dy.myboot.controller;
 
+import com.alibaba.druid.pool.DruidPooledConnection;
 import com.dy.myboot.core.beans.Method;
 import com.dy.myboot.core.sql.where.C;
 import com.dy.myboot.dao.UserDao;
 import com.dy.myboot.dao.UserDaoInterface;
 import com.dy.myboot.model.User;
+import org.apache.ibatis.transaction.jdbc.JdbcTransaction;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -33,10 +36,13 @@ public class UserController {
         return userDao.get(id);
     }
 
+    @Transactional
     @ResponseBody
     @PostMapping("add")
     public Integer add(User user) {
         userDaoInterface.insert(user);
+        String a = null;
+        a.indexOf('c');//自动回滚，user添加失败
         return user.getId().intValue();
     }
 }
