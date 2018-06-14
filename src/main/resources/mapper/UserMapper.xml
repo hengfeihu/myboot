@@ -11,10 +11,10 @@
     delete from t_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.dy.myboot.model.User" useGeneratedKeys="true" keyProperty="id">
-    insert into t_user (id, userName, password, 
+  <insert id="insert" keyProperty="id" parameterType="com.dy.myboot.model.User" useGeneratedKeys="true">
+    insert into t_user (id, userName, password,
       phone)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
       #{phone,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.dy.myboot.model.User">
@@ -32,5 +32,9 @@
   <select id="selectAll" resultMap="BaseResultMap">
     select id, userName, password, phone
     from t_user
+  </select>
+  <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, userName, password, phone
+    from t_user where userName LIKE '%#{userName}%'
   </select>
 </mapper>

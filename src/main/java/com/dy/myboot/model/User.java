@@ -1,6 +1,7 @@
 package com.dy.myboot.model;
 
 public class User {
+
     private Integer id;
 
     private String username;
@@ -43,11 +44,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
+        return "User{" + "id=" + id + ", username='" + username + '\'' + ", password='" + password + '\'' + ", phone='" + phone + '\'' + '}';
     }
 }
