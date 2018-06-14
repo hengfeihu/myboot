@@ -1,31 +1,28 @@
 package com.dy.myboot.model;
 
-import com.dy.myboot.core.annotation.po.FieldName;
-import com.dy.myboot.core.annotation.po.TableName;
-import com.dy.myboot.core.beans.Po;
+public class User {
+    private Integer id;
 
-@TableName(name = "t_user")
-public class User extends Po {
-    private Long id;
-    @FieldName(name = "userName")
-    private String userName;
+    private String username;
+
     private String password;
+
     private String phone;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
     public String getPassword() {
@@ -33,7 +30,7 @@ public class User extends Po {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password == null ? null : password.trim();
     }
 
     public String getPhone() {
@@ -41,14 +38,14 @@ public class User extends Po {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phone = phone == null ? null : phone.trim();
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", userName='" + userName + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';

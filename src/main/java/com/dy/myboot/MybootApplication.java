@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@MapperScan({"com.dy.myboot.dao", "com.dy.myboot.core.dao"})
+@MapperScan({"com.dy.myboot.dao", "com.dy.myboot"})
 public class MybootApplication {
 
     public static void main(String[] args) {
