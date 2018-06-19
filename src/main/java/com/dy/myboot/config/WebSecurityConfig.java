@@ -45,8 +45,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/index.html", "/static/**", "/login_p");
+    public void configure(WebSecurity web) {
+        web.ignoring().antMatchers("/css/**","/js/**","/druid/**");
+        web.ignoring().antMatchers("/favicon.ico");
+        web.ignoring().antMatchers("/login");
     }
 
     @Override
@@ -59,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         o.setAccessDecisionManager(urlAccessDecisionManager);
                         return o;
                     }
-                }).and().formLogin().loginPage("/login_p").loginProcessingUrl("/login").usernameParameter("username").passwordParameter("password").permitAll().failureHandler(new AuthenticationFailureHandler() {
+                }).and().formLogin().loginPage("/login").loginProcessingUrl("/login").usernameParameter("username").passwordParameter("password").permitAll().failureHandler(new AuthenticationFailureHandler() {
             @Override
             public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
                 httpServletResponse.setContentType("application/json;charset=utf-8");
@@ -84,6 +86,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 httpServletResponse.setContentType("application/json;charset=utf-8");
                 PrintWriter out = httpServletResponse.getWriter();
                 ObjectMapper objectMapper = new ObjectMapper();
+                httpServletRequest.getSession().setAttribute("admin", HrUtils.getCurrentHr().getName());
                 String s = "{\"status\":\"success\",\"msg\":" + objectMapper.writeValueAsString(HrUtils.getCurrentHr()) + "}";
                 out.write(s);
                 out.flush();

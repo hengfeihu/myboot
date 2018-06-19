@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class ViewController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(HttpServletRequest request) {
-        request.getSession().setAttribute("admin", "孙悟空");
+    public String index() {
         return "index";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
     }
 }
