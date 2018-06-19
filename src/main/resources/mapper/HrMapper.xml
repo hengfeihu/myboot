@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dy.myboot.mapper.HrMapper">
+  <resultMap id="BaseResultMap" type="com.dy.myboot.model.Hr">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="CHAR" property="phone" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="enable" jdbcType="BIT" property="enable" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="userface" jdbcType="VARCHAR" property="userface" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <resultMap id="lazyLoadRoles" type="com.dy.myboot.model.Hr" extends="BaseResultMap">
+      <collection property="roles" ofType="com.dy.myboot.model.Role" select="getRolesByHrId" column="id"/>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hr
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dy.myboot.model.Hr" useGeneratedKeys="true">
+    insert into hr (id, name, phone,
+      telephone, address, enable,
+      username, password, userface,
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR},
+      #{telephone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{enable,jdbcType=BIT},
+      #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{userface,jdbcType=VARCHAR},
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.dy.myboot.model.Hr">
+    update hr
+    set name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=CHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      enable = #{enable,jdbcType=BIT},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      userface = #{userface,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select h.*,r.id AS rid,r.name AS rname,r.nameZh AS rnameZh from ((hr h left join hr_role h_r on ((h.id = h_r.hrid))) left join role r on ((h_r.rid = r.id))) where h.id=#{hrId}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, phone, telephone, address, enable, username, password, userface,
+    remark
+    from hr
+  </select>
+  <select id="loadUserByUsername" resultMap="lazyLoadRoles">
+    select * from hr where username=#{username};
+  </select>
+  <select id="getRolesByHrId" resultType="com.dy.myboot.model.Role">
+    select r.* from hr_role h,role r where h.rid=r.id and h.hrid=#{id}
+  </select>
+</mapper>

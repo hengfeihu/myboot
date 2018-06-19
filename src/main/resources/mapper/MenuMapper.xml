@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dy.myboot.mapper.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.dy.myboot.model.Menu">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="component" jdbcType="VARCHAR" property="component" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="iconCls" jdbcType="VARCHAR" property="iconcls" />
+    <result column="keepAlive" jdbcType="BIT" property="keepalive" />
+    <result column="requireAuth" jdbcType="BIT" property="requireauth" />
+    <result column="parentid" jdbcType="INTEGER" property="parentid" />
+    <association property="meta" javaType="com.dy.myboot.model.MenuMeta">
+      <result column="keepAlive" property="keepAlive"/>
+      <result column="requireAuth" property="requireAuth"/>
+    </association>
+    <collection property="roles" ofType="com.dy.myboot.model.Role">
+      <id column="rid" property="id"/>
+      <result column="rname" property="name"/>
+      <result column="rnamezh" property="nameZh"/>
+    </collection>
+    <collection property="children" ofType="com.dy.myboot.model.Menu">
+      <id column="id2" property="id"/>
+      <result column="path2" property="path" jdbcType="VARCHAR"/>
+      <result column="component2" property="component" jdbcType="VARCHAR"/>
+      <result column="name2" property="name" jdbcType="VARCHAR"/>
+      <result column="iconCls2" property="iconCls" jdbcType="VARCHAR"/>
+      <association property="meta" javaType="com.dy.myboot.model.MenuMeta">
+        <result column="keepAlive2" property="keepAlive"/>
+        <result column="requireAuth2" property="requireAuth"/>
+      </association>
+      <collection property="children" ofType="com.dy.myboot.model.Menu">
+        <id column="id3" property="id"/>
+        <result column="name3" property="name" jdbcType="VARCHAR"/>
+      </collection>
+    </collection>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from menu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dy.myboot.model.Menu" useGeneratedKeys="true">
+    insert into menu (id, url, path,
+      component, name, iconCls,
+      keepAlive, requireAuth, parentid
+      )
+    values (#{id,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR},
+      #{component,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{iconcls,jdbcType=VARCHAR},
+      #{keepalive,jdbcType=BIT}, #{requireauth,jdbcType=BIT}, #{parentid,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.dy.myboot.model.Menu">
+    update menu
+    set url = #{url,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      component = #{component,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      iconCls = #{iconcls,jdbcType=VARCHAR},
+      keepAlive = #{keepalive,jdbcType=BIT},
+      requireAuth = #{requireauth,jdbcType=BIT},
+      parentid = #{parentid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, url, path, component, name, iconCls, keepAlive, requireAuth, parentid
+    from menu
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, url, path, component, name, iconCls, keepAlive, requireAuth, parentid
+    from menu
+  </select>
+  <select id="getMenusByHrId" parameterType="Long" resultMap="BaseResultMap">
+      select m1.id,m1.path,m1.component,m1.iconCls,m1.name,m1.requireAuth,m2.component as component2,m2.iconCls as iconCls2,m2.keepAlive as keepAlive2,m2.name as name2,m2.path as path2,m2.requireAuth as requireAuth2 from menu m1,menu m2
+      where m1.id=m2.parentId and m1.id!=1 and m2.id in(select mr.mid from hr_role h_r,menu_role mr where h_r.rid=mr.rid and h_r.hrid=#{hrId}) and m2.enabled=true order by m1.id,m2.id
+  </select>
+  <select id="menuTree" resultMap="BaseResultMap">
+      select m1.id,m1.name,m2.id as id2,m2.name as name2,m3.id as id3,m3.name as name3 from menu m1,menu m2,menu m3 where m1.id=m2.parentId and m2.id=m3.parentId and m3.enabled=true
+  </select>
+  <select id="getMenusByRid" resultType="Long">
+      SELECT mid from menu_role WHERE rid=#{rid}
+  </select>
+</mapper>
