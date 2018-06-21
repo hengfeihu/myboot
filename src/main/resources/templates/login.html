@@ -36,17 +36,17 @@
     $("#sign").on("click", function () {
         $.ajax({
             type: "POST",
-            dataType: "application/json",
+            dataType: "text",
             url: "/sign",
             data: {
                 username: $("#username").val(),
                 password: $("#password").val()
             },
             success: function (data) {
-                console.info(data);
-            },
-            error: function (data) {
-                console.info("error:" + data.responseText);
+                data = JSON.parse(data);
+                if (data.status === 'success') {
+                    window.location.href = "/";
+                }
             }
         });
     })

@@ -3,8 +3,10 @@ package com.dy.myboot.config;
 import com.dy.myboot.common.HrUtils;
 import com.dy.myboot.service.HrService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
@@ -27,6 +29,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableWebSecurity
@@ -63,37 +67,36 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         o.setAccessDecisionManager(urlAccessDecisionManager);
                         return o;
                     }
-                }).and().formLogin().loginPage("/login").loginProcessingUrl("/sign").usernameParameter("username").passwordParameter("password").permitAll().failureHandler(new AuthenticationFailureHandler() {
-            @Override
-            public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-                httpServletResponse.setContentType("application/json;charset=utf-8");
-                PrintWriter out = httpServletResponse.getWriter();
-                StringBuffer sb = new StringBuffer();
-                sb.append("{\"status\":\"error\",\"msg\":\"");
-                if (e instanceof UsernameNotFoundException || e instanceof BadCredentialsException) {
-                    sb.append("用户名或密码输入错误，登录失败!");
-                } else if (e instanceof DisabledException) {
-                    sb.append("账户被禁用，登录失败，请联系管理员!");
-                } else {
-                    sb.append("登录失败!");
-                }
-                sb.append("\"}");
-                out.write(sb.toString());
-                out.flush();
-                out.close();
-            }
-        }).successHandler(new AuthenticationSuccessHandler() {
-            @Override
-            public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-                httpServletResponse.setContentType("application/json;charset=utf-8");
-                PrintWriter out = httpServletResponse.getWriter();
-                ObjectMapper objectMapper = new ObjectMapper();
-                httpServletRequest.getSession().setAttribute("admin", HrUtils.getCurrentHr().getName());
-                String s = "{\"status\":\"success\",\"msg\":" + objectMapper.writeValueAsString(HrUtils.getCurrentHr()) + "}";
-                out.write(s);
-                out.flush();
-                out.close();
-            }
-        }).and().logout().permitAll().and().csrf().disable().exceptionHandling().accessDeniedHandler(authenticationAccessDeniedHandler);
+                }).and().formLogin().loginPage("/login").loginProcessingUrl("/sign").usernameParameter("username").passwordParameter("password").permitAll()
+                .failureHandler((httpServletRequest, httpServletResponse, e) -> {
+                    Gson gson = new Gson();
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("status", "error");
+                    httpServletResponse.setContentType("application/json;charset=utf-8");
+                    PrintWriter out = httpServletResponse.getWriter();
+                    if (e instanceof UsernameNotFoundException || e instanceof BadCredentialsException) {
+                        map.put("msg", "用户名或密码输入错误，登录失败!");
+                    } else if (e instanceof DisabledException) {
+                        map.put("msg", "账户被禁用，登录失败，请联系管理员!");
+                    } else {
+                        map.put("msg", "登录失败!");
+                    }
+                    out.write(gson.toJson(map));
+                    out.flush();
+                    out.close();
+                })
+                .successHandler((request, response, authentication) -> {
+                    response.setCharacterEncoding("UTF-8");
+                    response.setContentType("application/json;charset=utf-8");
+                    PrintWriter out = response.getWriter();
+                    request.getSession().setAttribute("admin", HrUtils.getCurrentHr().getName());
+                    Gson gson = new Gson();
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("status", "success");
+                    map.put("msg", gson.toJson(HrUtils.getCurrentHr()));
+                    out.write(gson.toJson(map));
+                    out.flush();
+                    out.close();
+                }).and().logout().permitAll().and().csrf().disable().exceptionHandling().accessDeniedHandler(authenticationAccessDeniedHandler);
     }
 }
