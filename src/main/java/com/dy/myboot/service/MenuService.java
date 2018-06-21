@@ -4,6 +4,7 @@ import com.dy.myboot.common.HrUtils;
 import com.dy.myboot.mapper.MenuMapper;
 import com.dy.myboot.model.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ public class MenuService {
     @Autowired
     public MenuMapper menuMapper;
 
+    @Cacheable(value = "allMenu", key = "'menu_all'")
     public List<Menu> getAllMenu() {
         return menuMapper.selectAll();
     }

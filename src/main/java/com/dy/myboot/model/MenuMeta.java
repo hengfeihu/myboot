@@ -1,6 +1,8 @@
 package com.dy.myboot.model;
 
-public class MenuMeta {
+import java.io.Serializable;
+
+public class MenuMeta implements Serializable{
     private boolean keepAlive;
     private boolean requireAuth;
 

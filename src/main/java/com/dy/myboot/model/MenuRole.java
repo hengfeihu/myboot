@@ -1,6 +1,8 @@
 package com.dy.myboot.model;
 
-public class MenuRole {
+import java.io.Serializable;
+
+public class MenuRole implements Serializable{
     private Integer id;
 
     private Integer mid;

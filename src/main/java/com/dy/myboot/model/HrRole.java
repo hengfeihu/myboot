@@ -1,6 +1,8 @@
 package com.dy.myboot.model;
 
-public class HrRole {
+import java.io.Serializable;
+
+public class HrRole implements Serializable{
     private Integer id;
 
     private Integer hrid;
