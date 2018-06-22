@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--
+* CoreUI - Free Bootstrap Admin Template
+* @version v2.0.0
+* @link https://coreui.io
+* Copyright (c) 2018 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <title>myboot</title>
+    <!-- Icons-->
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link href="/static/vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+    <link href="/static/vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <link href="/static/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <!-- Main styles for this application-->
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+</head>
+<body class="app flex-row align-items-center">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mx-4">
+                <div class="card-body p-4">
+                    <h1>注册</h1>
+                    <p class="text-muted">请创建您的账号</p>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="icon-user"></i>
+                  </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Username">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Email">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="icon-lock"></i>
+                  </span>
+                        </div>
+                        <input type="password" class="form-control" placeholder="Password">
+                    </div>
+
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="icon-lock"></i>
+                  </span>
+                        </div>
+                        <input type="password" class="form-control" placeholder="Repeat password">
+                    </div>
+                </div>
+                <div class="card-footer p-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <button class="btn btn-block btn-block" type="button" id="sign">
+                                <span>登录</span>
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-block btn-success" type="button" id="register">
+                                <span>注册</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap and necessary plugins-->
+<script src="/static/vendors/jquery/js/jquery.min.js"></script>
+<script src="/static/vendors/popper.js/js/popper.min.js"></script>
+<script src="/static/vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/vendors/pace-progress/js/pace.min.js"></script>
+<script src="/static/vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+<script src="/static/vendors/@coreui/coreui/js/coreui.min.js"></script>
+</body>
+<script>
+    $("#sign").on("click", function () {
+        window.location.href = "/login";
+    })
+</script>
+</html>

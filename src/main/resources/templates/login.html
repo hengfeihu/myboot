@@ -1,54 +1,104 @@
-<!doctype html>
+<!DOCTYPE html>
+<!--
+* CoreUI - Free Bootstrap Admin Template
+* @version v2.0.0
+* @link https://coreui.io
+* Copyright (c) 2018 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
+
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/signin.css">
-
-    <title>Hello, world!</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <title>myboot</title>
+    <!-- Icons-->
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link href="/static/vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+    <link href="/static/vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <link href="/static/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <!-- Main styles for this application-->
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/vendors/pace-progress/css/pace.min.css" rel="stylesheet">
 </head>
-<body class="text-center">
-<form class="form-signin" id="signForm">
-    <h1 class="h3 mb-3 font-weight-normal">用户登录</h1>
-    <label for="username" class="sr-only">用户名</label>
-    <input type="text" id="username" class="form-control" placeholder="用户名" required autofocus>
-    <label for="password" class="sr-only">密码</label>
-    <input type="password" id="password" class="form-control" placeholder="密码" required>
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" value="remember-me"> 记住我
-        </label>
+<body class="app flex-row align-items-center">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card-group">
+                <div class="card p-4">
+                    <div class="card-body">
+                        <h1>登录</h1>
+                        <p class="text-muted">请登录您的账号</p>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="icon-user"></i>
+                    </span>
+                            </div>
+                            <input type="text" id="username" class="form-control" placeholder="Username" autofocus>
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="icon-lock"></i>
+                    </span>
+                            </div>
+                            <input type="password" id="password" class="form-control" placeholder="Password">
+                        </div>
+                        <div class="row">
+                            <div class="col-3 text-left">
+                                <button type="button" id="sign" class="btn btn-primary px-4">登录</button>
+                            </div>
+                            <div class="col-3 text-left">
+                                <button type="button" class="btn btn-link px-0">忘记密码?</button>
+                            </div>
+                            <div class="col-6 text-right">
+                                <button type="button" id="register" class="btn btn-primary px-4">注册</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="button" id="sign">登录</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
-</form>
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="/static/js/jquery.min.js"></script>
-<script src="/static/js/popper.min.js"></script>
-<script src="/static/js/bootstrap.min.js"></script>
+</div>
+
+<!-- Bootstrap and necessary plugins-->
+<script src="/static/vendors/jquery/js/jquery.min.js"></script>
+<script src="/static/vendors/popper.js/js/popper.min.js"></script>
+<script src="/static/vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/vendors/pace-progress/js/pace.min.js"></script>
+<script src="/static/vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+<script src="/static/vendors/@coreui/coreui/js/coreui.min.js"></script>
 </body>
 <script>
-    $("#sign").on("click", function () {
+    $('#sign').on('click', function () {
         $.ajax({
-            type: "POST",
-            dataType: "text",
-            url: "/sign",
+            type: 'POST',
+            dataType: 'text',
+            url: '/sign',
             data: {
-                username: $("#username").val(),
-                password: $("#password").val()
+                username: $('#username')
+                    .val(),
+                password: $('#password')
+                    .val()
             },
             success: function (data) {
                 data = JSON.parse(data);
                 if (data.status === 'success') {
-                    window.location.href = "/";
+                    window.location.href = '/';
                 }
             }
-        });
+        })
+    });
+    $("#register").on("click", function () {
+        window.location.href = '/register';
     })
 </script>
 </html>

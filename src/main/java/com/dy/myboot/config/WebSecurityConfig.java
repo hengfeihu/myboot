@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/static/**", "/js/**", "/druid/**");
         web.ignoring().antMatchers("/favicon.ico");
-        web.ignoring().antMatchers("/login", "/error");
+        web.ignoring().antMatchers("/login", "/register", "/error");
     }
 
     @Override
@@ -87,6 +87,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     out.write(gson.toJson(map));
                     out.flush();
                     out.close();
-                }).and().logout().permitAll().and().csrf().disable().exceptionHandling().accessDeniedHandler(authenticationAccessDeniedHandler);
+                }).and().logout().logoutSuccessUrl("/login").permitAll().and().csrf().disable().exceptionHandling().accessDeniedHandler(authenticationAccessDeniedHandler);
     }
 }
